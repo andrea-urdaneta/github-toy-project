@@ -1,22 +1,21 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Auth from "./views/Auth";
+import { Switch, Route, HashRouter } from "react-router-dom";
+
 import Home from "./views/Home";
-import Login from "./views/Login";
 import Profile from "./views/Profile";
 import UserDetail from "./views/UserDetail";
+import EditUserProfile from "./views/EditUserProfile";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
-        <Route path="/" exact component={Login} />
-        <Route path="/home" exact component={Home} />
-        <Route path="/user" exact component={UserDetail} />
+        <Route path="/" exact component={Home} />
+        <Route path="/user/:username" exact component={UserDetail} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/auth/callback" exact component={Auth} />
+        <Route path="/profile/edit" exact component={EditUserProfile} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
