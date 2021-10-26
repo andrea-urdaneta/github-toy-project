@@ -5,13 +5,13 @@ const { contextBridge, ipcRenderer } = require("electron");
 contextBridge.exposeInMainWorld("ipcRenderer", {
   send: (channel, data) => {
     // whitelist channels
-    let validChannels = ["toMain", "send-auth-token", "open-user-profile"];
+    let validChannels = ["send-auth-token", "open-user-profile"];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
   },
   receive: (channel, func) => {
-    let validChannels = ["fromMain", "receive-auth-token", "open-user-profile"];
+    let validChannels = ["receive-auth-token", "open-user-profile"];
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
